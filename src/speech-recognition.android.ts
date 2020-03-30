@@ -173,6 +173,13 @@ export class SpeechRecognition implements SpeechRecognitionApi {
             intent.putExtra(android.speech.RecognizerIntent.EXTRA_PARTIAL_RESULTS, true);
         }
         intent.putExtra(android.speech.RecognizerIntent.EXTRA_MAX_RESULTS, 100);
+        if (options.silenceLength) {
+            intent.putExtra(android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_COMPLETE_SILENCE_LENGTH_MILLIS, options.silenceLength);
+            intent.putExtra(android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_POSSIBLY_COMPLETE_SILENCE_LENGTH_MILLIS, options.silenceLength);
+        }
+        if (options.minimumInputLength) {
+            intent.putExtra(android.speech.RecognizerIntent.EXTRA_SPEECH_INPUT_MINIMUM_LENGTH_MILLIS, options.minimumInputLength);
+        }
         loopHandler.post(new java.lang.Runnable({
           run: () => {
             this.recognizer.startListening(intent);

@@ -30,6 +30,13 @@ export interface SpeechRecognitionOptions {
    *   - Android: (number) 'ERROR_*' constant from https://developer.android.com/reference/android/speech/SpeechRecognizer.
    */
   onError?: (error: string | number) => void;
+
+  /**
+   * Android only
+   *
+   */
+  silenceLength?: number;
+  minimumInputLength?: number;
 }
 
 export interface SpeechRecognitionApi {
