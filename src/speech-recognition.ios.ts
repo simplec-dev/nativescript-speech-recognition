@@ -83,6 +83,8 @@ export class SpeechRecognition implements SpeechRecognitionApi {
               }
 
               if (error !== null || (result !== null && result.final)) {
+                console.log("speech rec startlistening error: " + error);
+                console.log("speech rec startlistening result: " + result);
                 this.audioEngine.stop();
                 this.inputNode.removeTapOnBus(0);
                 this.audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
@@ -100,9 +102,12 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
         let that = this;
 
+        this.inputNode.removeTapOnBus(0);
         let recordingFormat = this.inputNode.outputFormatForBus(0);
         this.inputNode.installTapOnBusBufferSizeFormatBlock(0, 1024, recordingFormat, (buffer: AVAudioPCMBuffer, when: AVAudioTime) => {
-          that.recognitionRequest.appendAudioPCMBuffer(buffer);
+          if (that.recognitionRequest != null) {
+            that.recognitionRequest.appendAudioPCMBuffer(buffer);
+          }
         });
 
         this.audioEngine.prepare();
