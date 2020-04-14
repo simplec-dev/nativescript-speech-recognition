@@ -84,7 +84,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
               if (error !== null || (result !== null && result.final)) {
                 console.log("speech rec startlistening error: " + error);
-                console.log("speech rec startlistening result: " + result);
+                //console.log("speech rec startlistening result: " + result);
                 this.audioEngine.stop();
                 this.inputNode.removeTapOnBus(0);
                 this.audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
