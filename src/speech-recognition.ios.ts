@@ -103,7 +103,16 @@ export class SpeechRecognition implements SpeechRecognitionApi {
         let that = this;
 
         this.inputNode.removeTapOnBus(0);
-        let recordingFormat = this.inputNode.outputFormatForBus(0);
+        var recordingFormat = this.inputNode.outputFormatForBus(0);
+        //recordingFormat.sampleRate = AVAudioSession.sharedInstance().sampleRate
+        let desiredSampleRate = recordingFormat.sampleRate;
+        let actualSampleRate = AVAudioSession.sharedInstance().sampleRate;
+        if (desiredSampleRate != actualSampleRate) {
+            AVAudioSession.sharedInstance().setPreferredSampleRateError(desiredSampleRate);
+            //recordingFormat = AVAudioFormat.alloc().initStandardFormatWithSampleRateChannels(actualSampleRate, 1);
+        }
+        console.log("###########################recordingformat samplerate: " + recordingFormat.sampleRate);
+        console.log("###########################sharedinstance samplerate: " + AVAudioSession.sharedInstance().sampleRate);
         this.inputNode.installTapOnBusBufferSizeFormatBlock(0, 1024, recordingFormat, (buffer: AVAudioPCMBuffer, when: AVAudioTime) => {
           if (that.recognitionRequest != null) {
             that.recognitionRequest.appendAudioPCMBuffer(buffer);
