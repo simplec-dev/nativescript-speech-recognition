@@ -6,6 +6,7 @@
 *.log.*
 src/**/*.d.ts
 src/platforms/android/*.aar
+src/package-lock.json
 !src/index.d.ts
 !src/references.d.ts
 !demo/karma.conf.js
