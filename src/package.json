@@ -1,5 +1,5 @@
 {
-  "name": "nativescript-speech-recognition",
+  "name": "@simplec-dev/nativescript-speech-recognition",
   "version": "1.5.1",
   "description": "Speech to text plugin, leveraging iOS and Android's built-in recognition engines.",
   "main": "speech-recognition",
@@ -31,7 +31,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/EddyVerbruggen/nativescript-speech-recognition.git"
+    "url": "https://github.com/simplec-dev/nativescript-speech-recognition.git"
+  },
+  "publishConfig": {
+      "registry": "https://npm.pkg.github.com/"
   },
   "keywords": [
     "NativeScript",
