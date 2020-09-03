@@ -232,7 +232,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
     this.onPermissionGranted = onPermissionGranted;
     this.onPermissionRejected = reject;
     AppPackageName.ActivityCompat.requestPermissions(
-        application.android.foregroundActivity, // TODO application.android.context
+        application.android.startActivity, // TODO application.android.context
         [android.Manifest.permission.RECORD_AUDIO],
         444 // irrelevant since we simply invoke onPermissionGranted
     );
