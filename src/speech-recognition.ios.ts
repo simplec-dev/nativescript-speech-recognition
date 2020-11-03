@@ -113,14 +113,19 @@ export class SpeechRecognition implements SpeechRecognitionApi {
         }
         console.log("###########################recordingformat samplerate: " + recordingFormat.sampleRate);
         console.log("###########################sharedinstance samplerate: " + AVAudioSession.sharedInstance().sampleRate);
-        this.inputNode.installTapOnBusBufferSizeFormatBlock(0, 1024, recordingFormat, (buffer: AVAudioPCMBuffer, when: AVAudioTime) => {
-          if (that.recognitionRequest != null) {
-            that.recognitionRequest.appendAudioPCMBuffer(buffer);
-          }
-        });
-
-        this.audioEngine.prepare();
-        resolve(this.audioEngine.startAndReturnError());
+        try {
+            this.inputNode.installTapOnBusBufferSizeFormatBlock(0, 1024, recordingFormat, (buffer: AVAudioPCMBuffer, when: AVAudioTime) => {
+              if (that.recognitionRequest != null) {
+                that.recognitionRequest.appendAudioPCMBuffer(buffer);
+              }
+            });
+    
+            this.audioEngine.prepare();
+            resolve(this.audioEngine.startAndReturnError());
+        } catch (e) {
+            console.error(e);
+            reject("Error tapping audio buffer: "+e);
+        }
       });
     });
   }
