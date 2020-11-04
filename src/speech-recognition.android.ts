@@ -207,10 +207,12 @@ export class SpeechRecognition implements SpeechRecognitionApi {
       let loopHandler = new android.os.Handler(android.os.Looper.getMainLooper());
       loopHandler.post(new java.lang.Runnable({
         run: () => {
-          this.recognizer.stopListening();
-          this.recognizer.cancel();
-          this.recognizer.destroy();
-          this.recognizer = null;
+          if (this.recognizer) {
+            this.recognizer.stopListening();
+            this.recognizer.cancel();
+            this.recognizer.destroy();
+            this.recognizer = null;
+          }
           resolve();
         }
       }));
