@@ -52,7 +52,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
         }
 
         this.audioSession = AVAudioSession.sharedInstance();
-        this.audioSession.setCategoryError(AVAudioSessionCategoryRecord);
+        this.audioSession.setCategoryError(AVAudioSessionCategoryPlayAndRecord);
         this.audioSession.setModeError(AVAudioSessionModeMeasurement);
         this.audioSession.setActiveWithOptionsError(true, AVAudioSessionSetActiveOptions.NotifyOthersOnDeactivation);
 
@@ -139,7 +139,7 @@ export class SpeechRecognition implements SpeechRecognitionApi {
 
       this.audioEngine.stop();
       this.recognitionRequest.endAudio();
-      this.audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
+      this.audioSession.setCategoryError(AVAudioSessionCategoryPlayAndRecord);
       this.audioSession.setModeError(AVAudioSessionModeDefault);
       this.speechRecognizer = null;
       this.recognitionTask = null;
