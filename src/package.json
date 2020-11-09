@@ -1,6 +1,6 @@
 {
   "name": "@simplec-dev/nativescript-speech-recognition",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "description": "Speech to text plugin, leveraging iOS and Android's built-in recognition engines.",
   "main": "speech-recognition",
   "typings": "index.d.ts",
