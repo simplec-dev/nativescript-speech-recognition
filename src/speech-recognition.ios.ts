@@ -82,21 +82,17 @@ export class SpeechRecognition implements SpeechRecognitionApi {
                 });
               }
 
-              if (error !== null || (result !== null && result.final)) {
+              if (error !== null) {
                 console.log("speech rec startlistening error: " + error);
-                //console.log("speech rec startlistening result: " + result);
                 this.audioEngine.stop();
                 this.inputNode.removeTapOnBus(0);
                 this.audioSession.setCategoryError(AVAudioSessionCategoryPlayAndRecord);
                 this.audioSession.setModeError(AVAudioSessionModeDefault);
+                this.recognitionTask.cancel();
+                this.recognitionTask.finish();
                 this.recognitionRequest = null;
                 this.recognitionTask = null;
-              }
-
-              if (error !== null) {
-                console.log("error in handler: " + error.localizedDescription);
                 options.onError && options.onError(error.localizedDescription);
-                // no need to 'reject' as the promise has been resolved by now anyway
               }
             });
 
