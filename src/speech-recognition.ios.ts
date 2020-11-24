@@ -139,6 +139,10 @@ export class SpeechRecognition implements SpeechRecognitionApi {
       this.recognitionRequest.endAudio();
       this.audioSession.setCategoryError(AVAudioSessionCategoryPlayback);
       this.audioSession.setModeError(AVAudioSessionModeDefault);
+      if (this.recognitionTask !== null) {
+          this.recognitionTask.cancel();
+          this.recognitionTask.finish();
+      }
       this.speechRecognizer = null;
       this.recognitionTask = null;
       resolve();
